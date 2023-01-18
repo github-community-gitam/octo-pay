@@ -36,9 +36,12 @@ export class LoginComponent implements OnInit {
         } else {
           alert('Wrong credentials')
         }
+        this.spinner = false
       },
-      error: (e) => alert('Error occured'),
-      complete: () => this.spinner = false
+      error: (e) => {
+        alert('Error occured')
+        this.spinner = false
+      }
     })
   }
 

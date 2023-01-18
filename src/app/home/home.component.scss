@@ -9,13 +9,13 @@ button:hover {
 }
 
 .vector-a {
-    background-image: url("/assets/imgs/Vector 1.png"), url("/assets/imgs/Vector 2.png");
+    background-image: url("../../assets/imgs/Vector1.png"), url("../../assets/imgs/Vector2.png");
     background-repeat: no-repeat;
     background-position: calc(50% - 200px) top, calc(50% + 200px) calc(50% + 100px);
 }
 
 .vector-b {
-    background-image: url("/assets/imgs/Vector 3.png"), url("/assets/imgs/Vector 4.png");
+    background-image: url("../../assets/imgs/Vector3.png"), url("../../assets/imgs/Vector4.png");
     background-repeat: no-repeat;
     background-position: calc(50% - 280px) top, calc(50% + 200px) calc(50% + 200px);
 }

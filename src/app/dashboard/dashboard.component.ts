@@ -38,6 +38,7 @@ export class DashboardComponent implements OnInit {
         this.uiData.balance = res.data.balance
         this.uiData.transfers = res.data.transfers
         this.uiData.regnumber = localStorage.getItem('username') as string
+        if (res.data.event_pass) this.uiData.eventpass = true
       }
       this.uiData.spinner = false
     })
