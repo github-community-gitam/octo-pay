@@ -9,6 +9,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HomeComponent } from './home/home.component';
 import { ScanComponent } from './scan/scan.component';
+import { ZXingScannerModule } from '@zxing/ngx-scanner';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { ScanComponent } from './scan/scan.component';
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    ZXingScannerModule
   ],
   providers: [],
   bootstrap: [AppComponent]
