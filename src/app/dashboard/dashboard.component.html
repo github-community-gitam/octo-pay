@@ -1,0 +1,86 @@
+<div class="container">
+    <div class="row py-3">
+        <label class="fs-1">Welcome {{uiData.firstname}}</label>
+        <div class="col-md">
+            <div class="fair-card bg-accent d-flex flex-column mt-3 m-auto">
+                <label class="synthek mt-2 ms-3" style="letter-spacing: 6px;">OCTO</label>
+                <label class="text-black fw-bold ms-4 fs-4"
+                    style="letter-spacing: 6px; margin-top: -10px;">COINS</label>
+                <label class="synthek text-black ms-auto mt-auto me-3"
+                    style="letter-spacing: 10px; font-size: 100px;">{{uiData.balance}}</label>
+            </div>
+        </div>
+        <div class="col-md" *ngIf="uiData.eventpass">
+            <div class="fair-card bg-accent d-flex flex-column mt-3 m-auto">
+                <label class="text-black fw-bold mt-3 ms-3 fs-4" style="letter-spacing: 2px;">EVENT PASS</label>
+                <img class="m-auto" src="assets/imgs/instagram.svg" height="150">
+            </div>
+        </div>
+    </div>
+    <div class="row py-3">
+        <div class="col">
+            <div class="rounded-circle bg-accent m-auto d-flex" style="height: 70px; width: 70px; cursor: pointer;"
+                data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                <img class="m-auto pt-1" src="assets/imgs/coin.png" height="50">
+            </div>
+            <div class="text-center">Buy Octocoins</div>
+        </div>
+        <div class="col">
+            <div class="rounded-circle bg-accent m-auto d-flex" style="height: 70px; width: 70px; cursor: pointer;"
+                (click)="createCheckout(true,1)">
+                <img class="m-auto" src="assets/imgs/tickets.png" height="50">
+            </div>
+            <div class="text-center">Buy Event pass</div>
+        </div>
+        <div class="col">
+            <div class="rounded-circle bg-accent m-auto d-flex" style="height: 70px; width: 70px; cursor: pointer;"
+                [routerLink]="'/scan'">
+                <img class="m-auto pt-1" src="assets/imgs/scan.png" height="50">
+            </div>
+            <div class="text-center">Scan QR</div>
+        </div>
+        <div class="col">
+            <div class="rounded-circle bg-accent m-auto" style="height: 70px; width: 70px; cursor: pointer;"
+                (click)="logout()">
+            </div>
+            <div class="text-center">Logout</div>
+        </div>
+    </div>
+    <div class="row py-3">
+        <label class="fs-2">Past transactions</label>
+        <div class="col">
+            <div class="fair-card2 bg-accent text-black fw-bold w-100 p-3">
+                <div class="d-flex p-2" *ngFor="let transfer of uiData.transfers">
+                    <div class="d-flex flex-column">
+                        <label class="fs-4">{{transfer['stall_id']}}</label>
+                        <label class="text-end">{{transfer['time']}}</label>
+                    </div>
+                    <label class="ms-auto my-auto"> {{transfer['amt']}}</label>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content bg-bg">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">Buy OctoCoins</h1>
+                <button type="button" class="btn-close bg-white" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body d-flex">
+                <button class="btn btn-light" [disabled]="modalData.oc<=0"
+                    (click)="modalData.oc = modalData.oc - 1">-</button>
+                <label class="mx-3 my-auto">{{ modalData.oc * 50}}</label>
+                <button class="btn btn-light" [disabled]="modalData.oc>=5"
+                    (click)="modalData.oc = modalData.oc + 1">+</button>
+                <label class="text-end my-auto ms-auto">Rs {{ modalData.oc * 100}}</label>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light"
+                    (click)="createCheckout(false, modalData.oc)">Confirm</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,40 @@
+@font-face {
+    font-family: Rubik;
+    src: url(assets/Rubik.ttf);
+}
+
+@font-face {
+    font-family: Synthek;
+    src: url(assets/Synthek.ttf);
+}
+
+html,
+body {
+    height: 100%;
+    width: 100%;
+    padding: 0px;
+    margin: 0px;
+    font-family: 'Rubik';
+    background-color: #1C1C1E;
+    color: white;
+}
+
+.synthek {
+    font-family: 'Synthek';
+}
+
+.bg-bg {
+    background-color: #1C1C1E;
+}
+
+.bg-accent {
+    background-color: #63E6E2;
+}
+
+.text-accent {
+    color: #63E6E2;
+}
+
+.br-15 {
+    border-radius: 15px;
+}

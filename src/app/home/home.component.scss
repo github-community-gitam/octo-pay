@@ -1,0 +1,21 @@
+button {
+    border-radius: 15px;
+    width: 250px;
+}
+
+button:hover {
+    background-color: #63E6E2;
+    filter: brightness(110%);
+}
+
+.vector-a {
+    background-image: url("/assets/imgs/Vector 1.png"), url("/assets/imgs/Vector 2.png");
+    background-repeat: no-repeat;
+    background-position: calc(50% - 200px) top, calc(50% + 200px) calc(50% + 100px);
+}
+
+.vector-b {
+    background-image: url("/assets/imgs/Vector 3.png"), url("/assets/imgs/Vector 4.png");
+    background-repeat: no-repeat;
+    background-position: calc(50% - 280px) top, calc(50% + 200px) calc(50% + 200px);
+}
