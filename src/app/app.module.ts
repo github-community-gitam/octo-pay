@@ -10,6 +10,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HomeComponent } from './home/home.component';
 import { ScanComponent } from './scan/scan.component';
 import { ZXingScannerModule } from '@zxing/ngx-scanner';
+import { QrCodeModule } from 'ng-qrcode';
+import { RegisterComponent } from './register/register.component';
 
 
 @NgModule({
@@ -18,7 +20,8 @@ import { ZXingScannerModule } from '@zxing/ngx-scanner';
     DashboardComponent,
     LoginComponent,
     HomeComponent,
-    ScanComponent
+    ScanComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
@@ -26,7 +29,8 @@ import { ZXingScannerModule } from '@zxing/ngx-scanner';
     HttpClientModule,
     ReactiveFormsModule,
     FormsModule,
-    ZXingScannerModule
+    ZXingScannerModule,
+    QrCodeModule
   ],
   providers: [],
   bootstrap: [AppComponent]

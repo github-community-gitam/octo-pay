@@ -16,8 +16,10 @@ export class DashboardComponent implements OnInit {
     regnumber: '',
     firstname: '',
     spinner: false,
-    eventpass: false,
-    transfers: []
+    eventpass: '',
+    transfers: [],
+    time: '',
+    dev: false
   }
 
   modalData = {
@@ -28,6 +30,9 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit(): void {
     this.checkoutSession()
+    setInterval(() => {
+      this.uiData.time = new Date().toLocaleString("en-US", { timeZone: "Asia/Kolkata" })
+    }, 1000)
   }
 
   getUserData() {
@@ -38,7 +43,8 @@ export class DashboardComponent implements OnInit {
         this.uiData.balance = res.data.balance
         this.uiData.transfers = res.data.transfers
         this.uiData.regnumber = localStorage.getItem('username') as string
-        if (res.data.event_pass) this.uiData.eventpass = true
+        if (res.data.event_pass) this.uiData.eventpass = res.data.event_pass
+        this.uiData.dev = res.dev
       }
       this.uiData.spinner = false
     })
@@ -77,6 +83,10 @@ export class DashboardComponent implements OnInit {
         this.getUserData()
       }
     })
+  }
+
+  rechargeOC() {
+    this.router.navigateByUrl(`register?quantity=${this.modalData.oc}&event_pass=${false}`)
   }
 
   logout() {

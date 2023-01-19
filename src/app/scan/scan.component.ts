@@ -46,7 +46,7 @@ export class ScanComponent implements OnInit {
       username: localStorage.getItem('username'),
       password: localStorage.getItem('password'),
       amt: 25,
-      stall_id: 'abc'
+      stall_id: 'stall_1001'
     }
     this.httpClient.post(environment.endpoint + '/scan', body).subscribe({
       next: (value: any) => {

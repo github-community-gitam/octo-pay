@@ -7,15 +7,13 @@
         <input class="form-control my-2" type="text" placeholder="Username" formControlName="username">
         <input class="form-control my-2" type="password" placeholder="Password" formControlName="password">
         <small class="my-2 text-muted">Note: Use GITAM student portal credentials.</small>
-        <button class="btn btn-info my-3 fw-bold bg-accent br-15 border-0" (click)="login()">
-            <div *ngIf="!spinner">Sign In</div>
+        <button class="btn btn-info my-3 fw-bold bg-accent br-15 border-0" (click)="register()">
+            <div *ngIf="!spinner">Register</div>
             <div *ngIf="spinner" class="spinner-border spinner-border-sm"></div>
         </button>
     </div>
-    <div class="d-flex mx-auto m-3">
-        <label class="synthek fs-3 my-auto mx-2" (click)="open('epoch')" style="cursor: pointer;">Epoch</label>
-        <span class="vr bg-accent opacity-100 mx-2 rounded" style="width: 3px;"></span>
-        <img class="mx-2 my-auto" src="assets/imgs/instagram.svg" height="30" (click)="open('instagram')" style="cursor: pointer;">
+    <div class="d-flex mx-auto text-center m-3">
+        OFFLINE <br> REGISTRATION
     </div>
 </div>
 
