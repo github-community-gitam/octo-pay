@@ -6,7 +6,7 @@
             <img class="my-auto" src="assets/imgs/logout.png" height="30" width="30" (click)="logout()"
                 style="cursor: pointer;">
         </div>
-        <label *ngIf="uiData.dev">Dev Account</label>
+        <label *ngIf="uiData.dev == true">Dev Account</label>
         <div class="col-md">
             <div class="fair-card bg-accent d-flex flex-column mt-3 m-auto">
                 <label class="synthek mt-2 ms-3" style="letter-spacing: 6px;">OCTO</label>
@@ -46,14 +46,14 @@
             </div>
             <div class="text-center">Scan QR</div>
         </div>
-        <div class="col" *ngIf="uiData.dev">
+        <div class="col" *ngIf="uiData.dev == true">
             <div class="rounded-circle bg-accent m-auto d-flex" style="height: 70px; width: 70px; cursor: pointer;"
                 [routerLink]="'/register'">
                 <img class="m-auto pt-1 ps-2" src="assets/imgs/edit.png" height="50">
             </div>
             <div class="text-center">Register event pass</div>
         </div>
-        <div class="col" *ngIf="uiData.dev">
+        <div class="col" *ngIf="uiData.dev == true">
             <div class="rounded-circle bg-accent m-auto d-flex" style="height: 70px; width: 70px; cursor: pointer;"
                 data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                 <img class="m-auto pt-1" src="assets/imgs/payment.png" height="50">
@@ -81,7 +81,7 @@
     <div class="modal-dialog">
         <div class="modal-content bg-bg">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="staticBackdropLabel">Buy OctoCoins <span *ngIf="uiData.dev">- Dev</span></h1>
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">Buy OctoCoins <span *ngIf="uiData.dev == true">- Dev</span></h1>
                 <button type="button" class="btn-close bg-white" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body d-flex">
@@ -93,9 +93,9 @@
                 <label class="text-end my-auto ms-auto">Rs {{ modalData.oc * 100}}</label>
             </div>
             <div class="modal-footer">
-                <button *ngIf="!uiData.dev" type="button" class="btn btn-light"
+                <button *ngIf="uiData.dev == false" type="button" class="btn btn-light"
                     (click)="createCheckout(false, modalData.oc)">Confirm</button>
-                <button *ngIf="uiData.dev" type="button" class="btn btn-light"
+                <button *ngIf="uiData.dev == true" type="button" class="btn btn-light"
                     (click)="rechargeOC()" data-bs-dismiss="modal">Confirm</button>
             </div>
         </div>

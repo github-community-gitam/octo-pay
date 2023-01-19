@@ -48,7 +48,7 @@ export class RegisterComponent implements OnInit {
       next: (res: any) => {
         if (res.error == false) {
           alert('Registration successful')
-          //this.router.navigate(['dashboard'])
+          this.router.navigate(['dashboard'])
         } else {
           alert('Wrong credentials')
         }
