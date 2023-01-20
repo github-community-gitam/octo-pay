@@ -24,9 +24,9 @@ export class RegisterComponent implements OnInit {
   
   ngOnInit(): void {
     this.activatedRoute.queryParams.subscribe((params: any) => {
-      if(params.quantity && params.e_pass) {
+      if(params.quantity && params.event_pass) {
         this.quantity = params.quantity
-        this.epass = params.e_pass
+        this.epass = params.event_pass
       }
     })
   }

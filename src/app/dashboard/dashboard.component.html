@@ -55,7 +55,7 @@
         </div>
         <div class="col" *ngIf="uiData.dev">
             <div class="rounded-circle bg-accent m-auto d-flex" style="height: 70px; width: 70px; cursor: pointer;"
-                data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                data-bs-toggle="modal" data-bs-target="#devBackdrop">
                 <img class="m-auto pt-1" src="assets/imgs/payment.png" height="50">
             </div>
             <div class="text-center">Recharge Octocoins</div>
@@ -81,7 +81,7 @@
     <div class="modal-dialog">
         <div class="modal-content bg-bg">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="staticBackdropLabel">Buy OctoCoins <span *ngIf="uiData.dev">- Dev</span></h1>
+                <h1 class="modal-title fs-5">Buy OctoCoins</h1>
                 <button type="button" class="btn-close bg-white" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body d-flex">
@@ -93,10 +93,31 @@
                 <label class="text-end my-auto ms-auto">Rs {{ modalData.oc * 100}}</label>
             </div>
             <div class="modal-footer">
-                <button *ngIf="uiData.dev == false" type="button" class="btn btn-light"
+                <button type="button" class="btn btn-light"
                     (click)="createCheckout(false, modalData.oc)">Confirm</button>
-                <button *ngIf="uiData.dev" type="button" class="btn btn-light"
-                    (click)="rechargeOC()" data-bs-dismiss="modal">Confirm</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="devBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content bg-bg">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5">Buy OctoCoins - Dev</h1>
+                <button type="button" class="btn-close bg-white" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body d-flex">
+                <button class="btn btn-light" [disabled]="modalData.oc<=1"
+                    (click)="modalData.oc = modalData.oc - 1">-</button>
+                <label class="mx-3 my-auto">{{ modalData.oc * 50}}</label>
+                <button class="btn btn-light" [disabled]="modalData.oc>=5"
+                    (click)="modalData.oc = modalData.oc + 1">+</button>
+                <label class="text-end my-auto ms-auto">Rs {{ modalData.oc * 100}}</label>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light" (click)="rechargeOC()"
+                    data-bs-dismiss="modal">Confirm</button>
             </div>
         </div>
     </div>
