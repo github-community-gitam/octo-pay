@@ -50,7 +50,7 @@ export class RegisterComponent implements OnInit {
           alert('Registration successful')
           this.router.navigate(['dashboard'])
         } else {
-          alert('Wrong credentials')
+          alert(res.message)
         }
         this.spinner = false
       },
