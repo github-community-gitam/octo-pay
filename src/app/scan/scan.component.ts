@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { BarcodeFormat } from '@zxing/library';
 import { environment } from 'src/environments/environment';
+import { CommonService } from '../services/common.service';
 
 @Component({
   selector: 'app-scan',
@@ -14,7 +15,7 @@ export class ScanComponent implements OnInit {
   spinner = false
   checkin = true
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient, private commonService: CommonService) { }
 
   ngOnInit(): void { }
 
@@ -60,9 +61,6 @@ export class ScanComponent implements OnInit {
       },
       error: (err) => {
         alert('Error has occured')
-      },
-      complete: () => {
-
       }
     })
   }

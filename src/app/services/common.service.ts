@@ -24,7 +24,7 @@ export class CommonService {
       if (res.error == false) {
         this.userData.fullname = res.data.fullname
         this.userData.balance = res.data.balance
-        this.userData.event_pass = res.data.event_pass
+        this.userData.event_pass = res.data.epass
         this.userData.dev = res.data.dev
         this.userData.transfers = res.data.transfers
         callback(true)

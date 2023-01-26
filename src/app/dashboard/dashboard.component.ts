@@ -22,7 +22,6 @@ export class DashboardComponent implements OnInit {
   ngOnInit(): void {
 
     this.commonService.getUserData((bool: any) => {
-      console.log(this.commonService.userData)
       if (bool) {
         this.userData = this.commonService.userData
         this.firstName = this.userData.fullname.split(" ")[0][0] + this.userData.fullname.split(" ")[0].substring(1).toLowerCase()
@@ -36,6 +35,7 @@ export class DashboardComponent implements OnInit {
 
   rechargeOC() {
     this.commonService.quantity = this.quantity
+    console.log(this.quantity)
     this.commonService.event_pass = false
   }
 

@@ -16,10 +16,10 @@
                     style="letter-spacing: 10px; font-size: 100px;">{{userData?.balance}}</label>
             </div>
         </div>
-        <div class="col-md" *ngIf="userData?.eventpass">
+        <div class="col-md" *ngIf="userData?.event_pass">
             <div class="fair-card bg-accent d-flex flex-column mt-3 m-auto">
                 <label class="text-black fw-bold mt-3 ms-3 fs-4" style="letter-spacing: 2px;">EVENT PASS</label>
-                <qr-code class="m-auto" [value]="userData.eventpass" size="220" errorCorrectionLevel="M"
+                <qr-code class="m-auto" [value]="userData.event_pass" size="220" errorCorrectionLevel="M"
                     lightColor="#63E6E2"></qr-code>
             </div>
         </div>
