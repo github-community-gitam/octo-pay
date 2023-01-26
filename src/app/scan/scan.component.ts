@@ -23,6 +23,7 @@ export class ScanComponent implements OnInit {
   }
 
   scanSuccessHandler(qr: string) {
+    this.spinner = true
     if (this.octopay) {
       this.transferCoins(qr)
     } else {
@@ -45,9 +46,11 @@ export class ScanComponent implements OnInit {
         } else {
           alert(res.message)
         }
+        this.spinner = false
       },
       error: (err) => {
         alert('Error has occured')
+        this.spinner = false
       }
     })
   }
@@ -60,9 +63,11 @@ export class ScanComponent implements OnInit {
         } else {
           alert('Invalid E Pass')
         }
+        this.spinner = false
       },
       error: (err) => {
         alert('Error has occured')
+        this.spinner = false
       }
     })
   }
