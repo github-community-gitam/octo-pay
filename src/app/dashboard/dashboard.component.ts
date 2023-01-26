@@ -20,7 +20,6 @@ export class DashboardComponent implements OnInit {
   constructor(private commonService: CommonService) { }
 
   ngOnInit(): void {
-
     this.commonService.getUserData((bool: any) => {
       if (bool) {
         this.userData = this.commonService.userData
@@ -33,9 +32,16 @@ export class DashboardComponent implements OnInit {
     }, 1000)
   }
 
+  validity() {
+    this.commonService.octopay = false
+  }
+
+  octopay() {
+    this.commonService.octopay = true
+  }
+
   rechargeOC() {
     this.commonService.quantity = this.quantity
-    console.log(this.quantity)
     this.commonService.event_pass = false
   }
 

@@ -9,6 +9,7 @@ export class CommonService {
 
   quantity = 1
   event_pass = true
+  octopay =  true
 
   userData = {
     fullname: '',

@@ -11,39 +11,63 @@ import { CommonService } from '../services/common.service';
 })
 export class ScanComponent implements OnInit {
 
+  octopay = true
   allowedFormats = [BarcodeFormat.QR_CODE]
   spinner = false
   checkin = true
 
   constructor(private httpClient: HttpClient, private commonService: CommonService) { }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    this.octopay = this.commonService.octopay
+  }
 
   scanSuccessHandler(qr: string) {
-    if (!qr.startsWith('stall')) {
-      alert('Invalid QR')
+    if (this.octopay) {
+      this.transferCoins(qr)
     } else {
-      const body = {
-        username: localStorage.getItem('username'),
-        password: localStorage.getItem('password'),
-        amt: 25,
-        stall_id: qr
-      }
-      this.httpClient.post(environment.endpoint + '/scan', body).subscribe({
-        next: (value: any) => {
-          if (value.error == true) {
-            alert(value.message)
-          } else {
-            alert('Transfer success')
-          }
-        },
-        error: (err) => {
-          alert('Error has occured')
-        }
-      })
+      this.checkPassValidity(qr)
     }
   }
 
+  transferCoins(qr: string) {
+    if (!qr.startsWith('stall')) alert('Invalid QR')
+    const body = {
+      username: localStorage.getItem('username'),
+      password: localStorage.getItem('password'),
+      amt: 25,
+      stall_id: qr
+    }
+    this.httpClient.post(environment.endpoint + '/scan', body).subscribe({
+      next: (res: any) => {
+        if (!res.error) {
+          alert('Transfer success')
+        } else {
+          alert(res.message)
+        }
+      },
+      error: (err) => {
+        alert('Error has occured')
+      }
+    })
+  }
+
+  checkPassValidity(qr: string) {
+    this.httpClient.post(environment.endpoint + '/checkin', { qr: qr, checkin: this.checkin }).subscribe({
+      next: (res: any) => {
+        if (!res.error) {
+          alert('Valid E Pass')
+        } else {
+          alert('Invalid E Pass')
+        }
+      },
+      error: (err) => {
+        alert('Error has occured')
+      }
+    })
+  }
+
+  
   test() {
     const body = {
       username: localStorage.getItem('username'),
@@ -52,11 +76,11 @@ export class ScanComponent implements OnInit {
       stall_id: 'stall_1001'
     }
     this.httpClient.post(environment.endpoint + '/scan', body).subscribe({
-      next: (value: any) => {
-        if (value.error == true) {
-          alert(value.message)
-        } else {
+      next: (res: any) => {
+        if (!res.error) {
           alert('Transfer success')
+        } else {
+          alert(res.message)
         }
       },
       error: (err) => {
