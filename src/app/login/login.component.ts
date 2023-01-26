@@ -29,16 +29,16 @@ export class LoginComponent implements OnInit {
     this.httpClient.post(environment.endpoint + '/login', { 'username': username, 'password': password }).subscribe({
       next: (res: any) => {
         if (res.error == false) {
-          localStorage.setItem('username', username)
-          localStorage.setItem('password', password)
+          localStorage.setItem('username', res.data.username)
+          localStorage.setItem('password', res.data.password)
           this.router.navigate(['dashboard'])
         } else {
-          alert('Wrong credentials')
+          alert(res.message)
         }
         this.spinner = false
       },
       error: (e) => {
-        alert('Error occured')
+        alert('Error has occured')
         this.spinner = false
       }
     })

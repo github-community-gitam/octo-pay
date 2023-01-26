@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
+import { CommonService } from '../services/common.service';
 
 @Component({
   selector: 'app-register',
@@ -12,23 +13,14 @@ import { environment } from 'src/environments/environment';
 export class RegisterComponent implements OnInit {
   spinner = false
 
-  epass = true
-  quantity = 1
-
   formData = new FormGroup({
     username: new FormControl('', Validators.required),
     password: new FormControl('', Validators.required)
   })
 
-  constructor(private httpClient: HttpClient, private router: Router, private activatedRoute: ActivatedRoute) { }
+  constructor(private httpClient: HttpClient, private router: Router, private commonService: CommonService) { }
   
   ngOnInit(): void {
-    this.activatedRoute.queryParams.subscribe((params: any) => {
-      if(params.quantity && params.event_pass) {
-        this.quantity = params.quantity
-        this.epass = params.event_pass
-      }
-    })
   }
 
   register() {
@@ -39,14 +31,13 @@ export class RegisterComponent implements OnInit {
       password: localStorage.getItem('password'),
       s_username: this.formData.controls.username.value as string,
       s_password: this.formData.controls.password.value as string,
-      event_pass: this.epass,
-      quantity: this.quantity,
-      amt: this.quantity * 50
+      event_pass: this.commonService.event_pass,
+      quantity: this.commonService.quantity,
     }
 
     this.httpClient.post(environment.endpoint + '/register', data).subscribe({
       next: (res: any) => {
-        if (res.error == false) {
+        if (!res.error) {
           alert('Registration successful')
           this.router.navigate(['dashboard'])
         } else {
@@ -55,7 +46,7 @@ export class RegisterComponent implements OnInit {
         this.spinner = false
       },
       error: (e) => {
-        alert('Error occured')
+        alert('Error has occured')
         this.spinner = false
       }
     })

@@ -9,12 +9,14 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./scan.component.scss']
 })
 export class ScanComponent implements OnInit {
+
   allowedFormats = [BarcodeFormat.QR_CODE]
+  spinner = false
+  checkin = true
 
   constructor(private httpClient: HttpClient) { }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void { }
 
   scanSuccessHandler(qr: string) {
     if (!qr.startsWith('stall')) {
