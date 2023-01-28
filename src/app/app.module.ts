@@ -12,6 +12,8 @@ import { ScanComponent } from './scan/scan.component';
 import { ZXingScannerModule } from '@zxing/ngx-scanner';
 import { QrCodeModule } from 'ng-qrcode';
 import { RegisterComponent } from './register/register.component';
+import { CheckinComponent } from './checkin/checkin.component';
+import { RegistrationsComponent } from './registrations/registrations.component';
 
 
 @NgModule({
@@ -21,7 +23,9 @@ import { RegisterComponent } from './register/register.component';
     LoginComponent,
     HomeComponent,
     ScanComponent,
-    RegisterComponent
+    RegisterComponent,
+    CheckinComponent,
+    RegistrationsComponent
   ],
   imports: [
     BrowserModule,

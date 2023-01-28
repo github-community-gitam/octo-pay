@@ -11,18 +11,22 @@ export class AuthGuard implements CanActivate {
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
 
-    if (state.url == '') 
+    if (state.url == '')
       return true
 
-    if (localStorage.getItem('username')) {
+    if (localStorage.getItem('username') && localStorage.getItem('password')) {
       if (state.url == '/login') {
+        this.router.navigate(['dashboard'])
+        return false
+      }
+      if (!localStorage.getItem('dev') && (state.url == '/checkin' || state.url == '/registrations' || state.url == '/register')) {
         this.router.navigate(['dashboard'])
         return false
       }
       return true
     }
 
-    if (!localStorage.getItem('username')) {
+    if (!localStorage.getItem('username') && !localStorage.getItem('password')) {
       if (state.url != '/login') {
         this.router.navigate(['login'])
         return false

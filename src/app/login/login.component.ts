@@ -28,9 +28,10 @@ export class LoginComponent implements OnInit {
     const password = this.formData.controls.password.value as string
     this.httpClient.post(environment.endpoint + '/login', { 'username': username, 'password': password }).subscribe({
       next: (res: any) => {
-        if (res.error == false) {
+        if (!res.error) {
           localStorage.setItem('username', res.data.username)
           localStorage.setItem('password', res.data.password)
+          localStorage.setItem('dev', res.data.dev)
           this.router.navigate(['dashboard'])
         } else {
           alert(res.message)

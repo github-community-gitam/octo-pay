@@ -1,0 +1,16 @@
+<div class="d-flex flex-column h-100 p-4">
+    <input class="form-control" type="text" placeholder="Search" [(ngModel)]="searchKey">
+
+    <div class="d-flex flex-column my-3" *ngFor="let item of data | keyvalue">
+        <div class="d-flex flex-column"
+            *ngIf="(item.value['username'] | lowercase).includes(searchKey) || (item.value['fullname'] | lowercase).includes(searchKey)">
+            <label class="">{{ item.value['username'] }}</label>
+            <label class="">{{ item.value['fullname'] }}</label>
+            <label class="">{{ item.value['balance'] }}</label>
+            <label class="">{{ item.value['dev'] }}</label>
+        </div>
+    </div>
+
+    <div *ngIf="!data" class="spinner-border spinner-border-sm m-auto"></div>
+
+</div>
