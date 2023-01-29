@@ -1,16 +1,31 @@
-<div class="d-flex flex-column h-100 p-4">
-    <input class="form-control" type="text" placeholder="Search" [(ngModel)]="searchKey">
-
-    <div class="d-flex flex-column my-3" *ngFor="let item of data | keyvalue">
-        <div class="d-flex flex-column"
-            *ngIf="(item.value['username'] | lowercase).includes(searchKey) || (item.value['fullname'] | lowercase).includes(searchKey)">
-            <label class="">{{ item.value['username'] }}</label>
-            <label class="">{{ item.value['fullname'] }}</label>
-            <label class="">{{ item.value['balance'] }}</label>
-            <label class="">{{ item.value['dev'] }}</label>
+<div class="container h-100">
+    <div class="row py-3">
+        <div class="d-flex">
+            <label class="fs-1">Registrations</label>
+            <img class="my-auto ms-auto" src="assets/imgs/logout.png" height="30" width="30" routerLink="/login"
+                (click)="logout()" style="cursor: pointer;">
         </div>
     </div>
-
-    <div *ngIf="!data" class="spinner-border spinner-border-sm m-auto"></div>
-
+    <div class="row  py-3">
+        <div class="d-flex">
+            <input class="searchbar form-control bg-accent p-4" type="text" placeholder="Search" [(ngModel)]="searchKey"
+                style="height: 60px;">
+        </div>
+    </div>
+    <div class="row">
+        <div class="d-flex flex-column" *ngFor="let item of data | keyvalue">
+            <div class="d-flex flex-column searchbar bg-accent my-2 p-4 text-black"
+                *ngIf="(item.value['username'] | lowercase).includes(searchKey) || (item.value['fullname'] | lowercase).includes(searchKey)">
+                <label>Username: {{ item.value['username'] }}</label>
+                <label>Fullname: {{ item.value['fullname'] }}</label>
+                <label>Balance: {{ item.value['balance'] }}</label>
+                <label>Dev: {{ item.value['dev'] }}</label>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="d-flex">
+            <div *ngIf="!data" class="spinner-border spinner-border-sm m-auto"></div>
+        </div>
+    </div>
 </div>

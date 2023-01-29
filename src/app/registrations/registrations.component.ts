@@ -32,4 +32,9 @@ export class RegistrationsComponent implements OnInit {
     return key.includes(this.searchKey)
   }
 
+  logout() {
+    localStorage.removeItem('username')
+    localStorage.removeItem('userdata')
+  }
+
 }

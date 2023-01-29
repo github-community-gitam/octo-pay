@@ -1,13 +1,23 @@
-<div class="d-flex flex-column h-100 p-4">
-
-    <div class="d-flex flex-column my-3" *ngFor="let item of data">
-        <div class="d-flex flex-column">
-            <label class="">{{ item.username }}</label>
-            <label class="">{{ item.time }}</label>
-            <label class="">{{ item.amt }}</label>
+<div class="container h-100">
+    <div class="row py-3">
+        <div class="d-flex">
+            <label class="fs-1">Transactions</label>
+            <img class="my-auto ms-auto" src="assets/imgs/logout.png" height="30" width="30" routerLink="/login"
+                (click)="logout()" style="cursor: pointer;">
         </div>
     </div>
-
-    <div *ngIf="!data" class="spinner-border spinner-border-sm m-auto"></div>
-
+    <div class="row py-3">
+        <div class="d-flex flex-column my-2 p-4 bg-accent br-25 text-black" *ngFor="let item of data">
+            <div class="d-flex flex-column">
+                <label>Username: {{ item.username }}</label>
+                <label>Time: {{ item.time }}</label>
+                <label>Amount: {{ item.amt }}</label>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="d-flex">
+            <div *ngIf="!data" class="spinner-border spinner-border-sm m-auto"></div>
+        </div>
+    </div>
 </div>

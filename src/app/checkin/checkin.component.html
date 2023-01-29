@@ -1,6 +1,6 @@
-<div class="d-flex flex-column p-5 h-100">
+<div class="d-flex flex-column p-4 h-100">
     <label class="mx-auto fs-1" >Check In / Check out</label>
-    <div class="d-flex mx-auto" style="height: 250px; width: 250px;">
+    <div class="d-flex mx-auto py-4" style="height: 250px; width: 250px;">
         <zxing-scanner *ngIf="!spinner" class="mx-auto" [formats]="allowedFormats"
             (scanSuccess)="scanSuccessHandler($event)"></zxing-scanner>
         <div class="m-auto">
@@ -11,8 +11,5 @@
         <input class="form-check-input" type="checkbox" role="switch" [(ngModel)]="checkin">
         <label class="form-check-label" *ngIf="checkin">Check in</label>
         <label class="form-check-label" *ngIf="!checkin">Check out</label>
-    </div>
-    <div class="mx-auto mt-auto">
-        <button class="btn btn-light m-4" routerLink="/dashboard">Dashboard</button>
     </div>
 </div>

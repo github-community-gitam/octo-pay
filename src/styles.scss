@@ -28,7 +28,7 @@ body {
 }
 
 .bg-accent {
-    background-color: #63E6E2;
+    background-color: #63E6E2 !important;
 }
 
 .text-accent {
@@ -37,4 +37,8 @@ body {
 
 .br-15 {
     border-radius: 15px;
+}
+
+.br-25 {
+    border-radius: 25px;
 }

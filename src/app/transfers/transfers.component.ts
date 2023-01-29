@@ -28,5 +28,10 @@ export class TransfersComponent implements OnInit {
       }
     })
   }
+  
+  logout() {
+    localStorage.removeItem('username')
+    localStorage.removeItem('userdata')
+  }
 
 }
