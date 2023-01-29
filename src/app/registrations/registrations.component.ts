@@ -9,13 +9,16 @@ import { environment } from 'src/environments/environment';
 })
 export class RegistrationsComponent implements OnInit {
 
+  userdata: any
+
   data: undefined
   searchKey = ''
 
   constructor(private httpClient: HttpClient) { }
 
   ngOnInit() {
-    this.httpClient.post(environment.endpoint + '/registrations', { username: localStorage.getItem('username'), password: localStorage.getItem('password') }).subscribe({
+    this.userdata = JSON.parse(localStorage.getItem('userdata')!)
+    this.httpClient.post(environment.endpoint + '/registrations', { username: localStorage.getItem('username'), password: this.userdata.password }).subscribe({
       next: (res: any) => {
         this.data = res
       },

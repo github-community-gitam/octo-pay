@@ -14,6 +14,7 @@ import { QrCodeModule } from 'ng-qrcode';
 import { RegisterComponent } from './register/register.component';
 import { CheckinComponent } from './checkin/checkin.component';
 import { RegistrationsComponent } from './registrations/registrations.component';
+import { TransfersComponent } from './transfers/transfers.component';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import { RegistrationsComponent } from './registrations/registrations.component'
     ScanComponent,
     RegisterComponent,
     CheckinComponent,
-    RegistrationsComponent
+    RegistrationsComponent,
+    TransfersComponent
   ],
   imports: [
     BrowserModule,

@@ -8,8 +8,7 @@
         <input class="form-control my-2" type="password" placeholder="Password" formControlName="password">
         <small class="my-2 text-muted">Note: Use GITAM student portal credentials.</small>
         <button class="btn btn-info my-3 fw-bold bg-accent br-15 border-0" (click)="reg()">
-            <div *ngIf="!spinner && event_pass">Register</div>
-            <div *ngIf="!spinner && !event_pass">Recharge</div>
+            {{buttonText}}
             <div *ngIf="spinner" class="spinner-border spinner-border-sm"></div>
         </button>
     </div>

@@ -2,7 +2,6 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { BarcodeFormat } from '@zxing/library';
 import { environment } from 'src/environments/environment';
-import { CommonService } from '../services/common.service';
 
 @Component({
   selector: 'app-scan',
@@ -11,19 +10,22 @@ import { CommonService } from '../services/common.service';
 })
 export class ScanComponent implements OnInit {
 
+  userdata: any
+
   allowedFormats = [BarcodeFormat.QR_CODE]
   spinner = false
 
   constructor(private httpClient: HttpClient) { }
 
-  ngOnInit(): void {
+  ngOnInit() {
+    this.userdata = JSON.parse(localStorage.getItem('userdata')!)
   }
 
   scanSuccessHandler(qr: string) {
-    if (!qr.startsWith('stall')) alert('Invalid QR')
+    this.spinner = true
     const body = {
       username: localStorage.getItem('username'),
-      password: localStorage.getItem('password'),
+      password: this.userdata.password,
       amt: 25,
       stall_id: qr
     }
@@ -42,5 +44,30 @@ export class ScanComponent implements OnInit {
       }
     })
   }
+
+  test() {
+    this.spinner = true
+    const body = {
+      username: localStorage.getItem('username'),
+      password: this.userdata.password,
+      amt: 25,
+      stall_id: 'jtSvphaMu2Jq8yND4qhDJQ=='
+    }
+    this.httpClient.post(environment.endpoint + '/scan', body).subscribe({
+      next: (res: any) => {
+        if (!res.error) {
+          alert('Transfer success')
+        } else {
+          alert(res.message)
+        }
+        this.spinner = false
+      },
+      error: (err) => {
+        alert('Error has occured')
+        this.spinner = false
+      }
+    })
+  }
+
 
 }

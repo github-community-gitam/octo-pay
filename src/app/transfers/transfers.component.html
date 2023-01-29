@@ -1,0 +1,13 @@
+<div class="d-flex flex-column h-100 p-4">
+
+    <div class="d-flex flex-column my-3" *ngFor="let item of data">
+        <div class="d-flex flex-column">
+            <label class="">{{ item.username }}</label>
+            <label class="">{{ item.time }}</label>
+            <label class="">{{ item.amt }}</label>
+        </div>
+    </div>
+
+    <div *ngIf="!data" class="spinner-border spinner-border-sm m-auto"></div>
+
+</div>

@@ -30,8 +30,7 @@ export class LoginComponent implements OnInit {
       next: (res: any) => {
         if (!res.error) {
           localStorage.setItem('username', res.data.username)
-          localStorage.setItem('password', res.data.password)
-          localStorage.setItem('dev', res.data.dev)
+          localStorage.setItem('userdata', JSON.stringify(res.data.userdata))
           this.router.navigate(['dashboard'])
         } else {
           alert(res.message)

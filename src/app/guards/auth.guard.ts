@@ -14,19 +14,24 @@ export class AuthGuard implements CanActivate {
     if (state.url == '')
       return true
 
-    if (localStorage.getItem('username') && localStorage.getItem('password')) {
+    if (localStorage.getItem('username') && localStorage.getItem('userdata')) {
+      const userdata = JSON.parse(localStorage.getItem('userdata')!)
       if (state.url == '/login') {
         this.router.navigate(['dashboard'])
         return false
       }
-      if (!localStorage.getItem('dev') && (state.url == '/checkin' || state.url == '/registrations' || state.url == '/register')) {
+      if (!userdata.dev && (state.url == '/checkin' || state.url == '/registrations' || state.url == '/register')) {
+        this.router.navigate(['dashboard'])
+        return false
+      }
+      if (!userdata.stall && (state.url == '/transfers')) {
         this.router.navigate(['dashboard'])
         return false
       }
       return true
     }
 
-    if (!localStorage.getItem('username') && !localStorage.getItem('password')) {
+    if (!localStorage.getItem('username') && !localStorage.getItem('userdata')) {
       if (state.url != '/login') {
         this.router.navigate(['login'])
         return false

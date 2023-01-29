@@ -8,6 +8,7 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { RegistrationsComponent } from './registrations/registrations.component';
 import { ScanComponent } from './scan/scan.component';
+import { TransfersComponent } from './transfers/transfers.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -16,7 +17,9 @@ const routes: Routes = [
   { path: 'scan', component: ScanComponent, canActivate: [AuthGuard] },
   { path: 'register', component: RegisterComponent, canActivate: [AuthGuard] },
   { path: 'checkin', component: CheckinComponent, canActivate: [AuthGuard] },
-  { path: 'registrations', component: RegistrationsComponent, canActivate: [AuthGuard] }
+  { path: 'registrations', component: RegistrationsComponent, canActivate: [AuthGuard] },
+  { path: 'transfers', component: TransfersComponent, canActivate: [AuthGuard] }
+
 ];
 
 @NgModule({

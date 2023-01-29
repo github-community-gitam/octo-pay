@@ -16,10 +16,10 @@
                     style="letter-spacing: 10px; font-size: 100px;">{{userData?.balance}}</label>
             </div>
         </div>
-        <div class="col-md" *ngIf="userData?.event_pass">
+        <div class="col-md" *ngIf="userData?.epass">
             <div class="fair-card bg-accent d-flex flex-column mt-3 m-auto">
                 <label class="text-black fw-bold mt-3 ms-3 fs-4" style="letter-spacing: 2px;">EVENT PASS</label>
-                <qr-code class="m-auto" [value]="userData.event_pass" size="220" errorCorrectionLevel="M"
+                <qr-code class="m-auto" [value]="userData.epass" size="220" errorCorrectionLevel="M"
                     lightColor="#63E6E2"></qr-code>
             </div>
         </div>
@@ -30,6 +30,14 @@
                 <img class="m-auto pt-1" src="assets/imgs/scan.png" height="50">
             </div>
             <div class="text-center">Scan QR</div>
+        </div>
+    </div>
+    <div class="row py-3">
+        <div class="col">
+            <div class="rounded-circle bg-accent m-auto d-flex" style="height: 70px; width: 70px; cursor: pointer;" routerLink="/transfers">
+                <img class="m-auto pt-1" src="assets/imgs/scan.png" height="50">
+            </div>
+            <div class="text-center">Stall Transactions</div>
         </div>
     </div>
     <div class="row py-3" *ngIf="userData?.dev">
@@ -63,7 +71,7 @@
         <label class="fs-2">Past transactions</label>
         <div class="col">
             <div class="fair-card2 bg-accent text-black fw-bold w-100 p-3">
-                <div class="d-flex p-2" *ngFor="let transfer of userData?.transfers">
+                <div class="d-flex p-2" *ngFor="let transfer of transfers">
                     <div class="d-flex flex-column">
                         <label class="fs-4">{{transfer['stall_name']}}</label>
                         <label class="text-end">{{transfer['time']}}</label>
