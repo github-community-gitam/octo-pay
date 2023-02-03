@@ -9,7 +9,7 @@ import { environment } from 'src/environments/environment';
 })
 export class TransfersComponent implements OnInit {
 
-  userdata: any
+  userdata = JSON.parse(localStorage.getItem('userdata')!)
   data: any
 
   constructor(private httpClient: HttpClient) { }
@@ -19,19 +19,14 @@ export class TransfersComponent implements OnInit {
   }
 
   async getData() {
-    this.userdata = JSON.parse(localStorage.getItem('userdata')!)
-    this.httpClient.post(environment.endpoint + '/transfers', { username: localStorage.getItem('username'), password: this.userdata.password }).subscribe((res: any) => {
-      if (!res.error) {
-        this.data = res.transfers
-      } else {
-        alert(res.message)
+    this.httpClient.post(environment.endpoint + '/transfers', { username: this.userdata.username, password: this.userdata.password }).subscribe({
+      next: (res: any) => {
+        this.data = res
+      },
+      error: (err) => {
+        alert(err.error)
       }
     })
-  }
-  
-  logout() {
-    localStorage.removeItem('username')
-    localStorage.removeItem('userdata')
   }
 
 }

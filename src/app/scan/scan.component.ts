@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { BarcodeFormat } from '@zxing/library';
 import { environment } from 'src/environments/environment';
 
@@ -8,39 +8,31 @@ import { environment } from 'src/environments/environment';
   templateUrl: './scan.component.html',
   styleUrls: ['./scan.component.scss']
 })
-export class ScanComponent implements OnInit {
+export class ScanComponent {
 
-  userdata: any
+  userdata = JSON.parse(localStorage.getItem('userdata')!)
 
   allowedFormats = [BarcodeFormat.QR_CODE]
   spinner = false
 
   constructor(private httpClient: HttpClient) { }
 
-  ngOnInit() {
-    this.userdata = JSON.parse(localStorage.getItem('userdata')!)
-  }
-
   scanSuccessHandler(qr: string) {
     this.spinner = true
     const body = {
-      username: localStorage.getItem('username'),
+      username: this.userdata.username,
       password: this.userdata.password,
       amt: 25,
       stall_id: qr
     }
     this.httpClient.post(environment.endpoint + '/scan', body).subscribe({
       next: (res: any) => {
-        if (!res.error) {
-          alert('Transfer success')
-        } else {
-          alert(res.message)
-        }
         this.spinner = false
+        alert('Transfer success')
       },
       error: (err) => {
-        alert('Error has occured')
         this.spinner = false
+        alert(err.error)
       }
     })
   }

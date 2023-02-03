@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
@@ -9,7 +9,7 @@ import { environment } from 'src/environments/environment';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
   spinner = false
 
   formData = new FormGroup({
@@ -19,26 +19,19 @@ export class LoginComponent implements OnInit {
 
   constructor(private httpClient: HttpClient, private router: Router) { }
 
-  ngOnInit(): void { }
-
   login() {
     if (!this.formData.valid) return
     this.spinner = true
-    const username = this.formData.controls.username.value as string
-    const password = this.formData.controls.password.value as string
+    const username = this.formData.controls.username.value?.toLowerCase()
+    const password = this.formData.controls.password.value?.toString()
     this.httpClient.post(environment.endpoint + '/login', { 'username': username, 'password': password }).subscribe({
       next: (res: any) => {
-        if (!res.error) {
-          localStorage.setItem('username', res.data.username)
-          localStorage.setItem('userdata', JSON.stringify(res.data.userdata))
-          this.router.navigate(['dashboard'])
-        } else {
-          alert(res.message)
-        }
+        localStorage.setItem('userdata', JSON.stringify(res))
         this.spinner = false
+        this.router.navigate(['dashboard'])
       },
       error: (e) => {
-        alert('Error has occured')
+        alert(e.error)
         this.spinner = false
       }
     })

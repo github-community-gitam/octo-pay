@@ -6,21 +6,21 @@
             <img class="my-auto" src="assets/imgs/logout.png" height="30" width="30" routerLink="/login"
                 (click)="logout()" style="cursor: pointer;">
         </div>
-        <label *ngIf="userData?.dev">Dev Account</label>
-        <label *ngIf="userData?.stall">Stall Account</label>
+        <label *ngIf="userdata?.dev">Dev Account</label>
+        <label *ngIf="userdata?.stall">Stall Account</label>
         <div class="col-md">
             <div class="fair-card bg-accent d-flex flex-column mt-3 m-auto">
                 <label class="synthek mt-2 ms-3" style="letter-spacing: 6px;">OCTO</label>
                 <label class="text-black fw-bold ms-4 fs-4"
                     style="letter-spacing: 6px; margin-top: -10px;">COINS</label>
                 <label class="synthek text-black ms-auto mt-auto me-3"
-                    style="letter-spacing: 10px; font-size: 100px;">{{userData?.balance}}</label>
+                    style="letter-spacing: 10px; font-size: 100px;">{{userdata?.balance}}</label>
             </div>
         </div>
-        <div class="col-md" *ngIf="userData?.epass">
+        <div class="col-md" *ngIf="userdata?.epass">
             <div class="fair-card bg-accent d-flex flex-column mt-3 m-auto">
                 <label class="text-black fw-bold mt-3 ms-3 fs-4" style="letter-spacing: 2px;">EVENT PASS</label>
-                <qr-code class="m-auto" [value]="userData.epass" size="220" errorCorrectionLevel="M"
+                <qr-code class="m-auto" [value]="userdata.epass" size="220" errorCorrectionLevel="M"
                     lightColor="#63E6E2"></qr-code>
             </div>
         </div>
@@ -33,7 +33,7 @@
             </div>
             <div class="text-center">Scan QR</div>
         </div>
-        <div class="col" *ngIf="userData?.stall">
+        <div class="col" *ngIf="userdata?.stall">
             <div class="rounded-circle bg-accent m-auto d-flex" style="height: 70px; width: 70px; cursor: pointer;"
                 routerLink="/transfers">
                 <img class="m-auto pt-1" src="assets/imgs/transaction.png" height="50">
@@ -41,7 +41,7 @@
             <div class="text-center">Stall Transactions</div>
         </div>
     </div>
-    <div class="row py-3" *ngIf="userData?.dev">
+    <div class="row py-3" *ngIf="userdata?.dev">
         <div class="col">
             <div class="rounded-circle bg-accent m-auto d-flex" style="height: 70px; width: 70px; cursor: pointer;"
                 routerLink="/checkin">

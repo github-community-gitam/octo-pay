@@ -14,7 +14,7 @@ export class AuthGuard implements CanActivate {
     if (state.url == '')
       return true
 
-    if (localStorage.getItem('username') && localStorage.getItem('userdata')) {
+    if (localStorage.getItem('userdata')) {
       const userdata = JSON.parse(localStorage.getItem('userdata')!)
       if (state.url == '/login') {
         this.router.navigate(['dashboard'])
@@ -31,14 +31,13 @@ export class AuthGuard implements CanActivate {
       return true
     }
 
-    if (!localStorage.getItem('username') && !localStorage.getItem('userdata')) {
+    else {
       if (state.url != '/login') {
         this.router.navigate(['login'])
         return false
       }
       return true
     }
-
-    return false
+    
   }
 }

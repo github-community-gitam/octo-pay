@@ -1,4 +1,4 @@
-import { HttpClient, JsonpInterceptor } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { environment } from 'src/environments/environment';
 
@@ -9,7 +9,7 @@ import { environment } from 'src/environments/environment';
 })
 export class RegistrationsComponent implements OnInit {
 
-  userdata: any
+  userdata = JSON.parse(localStorage.getItem('userdata')!)
 
   data: undefined
   searchKey = ''
@@ -17,24 +17,18 @@ export class RegistrationsComponent implements OnInit {
   constructor(private httpClient: HttpClient) { }
 
   ngOnInit() {
-    this.userdata = JSON.parse(localStorage.getItem('userdata')!)
-    this.httpClient.post(environment.endpoint + '/registrations', { username: localStorage.getItem('username'), password: this.userdata.password }).subscribe({
+    this.httpClient.post(environment.endpoint + '/registrations', { username: this.userdata.username, password: this.userdata.password }).subscribe({
       next: (res: any) => {
         this.data = res
       },
       error: (err) => {
-        alert('Error has occured')
+        alert(err.error)
       }
     })
   }
 
   search(key: any) {
     return key.includes(this.searchKey)
-  }
-
-  logout() {
-    localStorage.removeItem('username')
-    localStorage.removeItem('userdata')
   }
 
 }

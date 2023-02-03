@@ -2,7 +2,6 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import Integer from '@zxing/library/esm/core/util/Integer';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -11,7 +10,14 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent implements OnInit {
+
   spinner = false
+  event_pass = false
+  quantity = 1
+
+  buttonText = ''
+
+  userdata = JSON.parse(localStorage.getItem('userdata')!)
 
   formData = new FormGroup({
     username: new FormControl('', Validators.required),
@@ -20,16 +26,8 @@ export class RegisterComponent implements OnInit {
 
   constructor(private httpClient: HttpClient, private router: Router) { }
 
-  userdata: any
-
-  event_pass = false
-  quantity = 1
-
-  buttonText = ''
-
   ngOnInit(): void {
-    this.userdata = JSON.parse(localStorage.getItem('userdata')!)
-    if(localStorage.getItem('event_pass')) {
+    if (localStorage.getItem('event_pass')) {
       this.event_pass = true
       this.buttonText = 'Register'
     } else {
@@ -39,7 +37,7 @@ export class RegisterComponent implements OnInit {
   }
 
   reg() {
-    if(this.event_pass) {
+    if (this.event_pass) {
       this.register()
     } else {
       this.recharge()
@@ -50,24 +48,20 @@ export class RegisterComponent implements OnInit {
     if (!this.formData.valid) return
     this.spinner = true
     const data = {
-      username: localStorage.getItem('username'),
+      username: this.userdata.username,
       password: this.userdata.password,
-      s_username: this.formData.controls.username.value as string,
-      s_password: this.formData.controls.password.value as string,
+      s_username: this.formData.controls.username.value?.toLowerCase(),
+      s_password: this.formData.controls.password.value?.toString(),
     }
     this.httpClient.post(environment.endpoint + '/register', data).subscribe({
       next: (res: any) => {
-        if (!res.error) {
-          alert('Registration successful')
-          this.router.navigate(['dashboard'])
-        } else {
-          alert(res.message)
-        }
         this.spinner = false
+        alert('Registration successful')
+        this.router.navigate(['dashboard'])
       },
-      error: (e) => {
-        alert('Error has occured')
+      error: (err) => {
         this.spinner = false
+        alert(err.error)
       }
     })
   }

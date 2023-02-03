@@ -14,14 +14,13 @@ export class DashboardComponent implements OnInit {
   firstName = ''
   quantity = 1
 
-  userData: any
+  userdata = JSON.parse(localStorage.getItem('userdata')!)
   transfers: any
 
   constructor(private httpClient: HttpClient) { }
 
   ngOnInit(): void {
-    this.userData = JSON.parse(localStorage.getItem('userdata')!)
-    this.firstName = this.userData.fullname.split(" ")[0][0] + this.userData.fullname.split(" ")[0].substring(1).toLowerCase()
+    this.firstName = this.userdata.fullname.split(" ")[0][0] + this.userdata.fullname.split(" ")[0].substring(1).toLowerCase()
     this.getUserData()
     setInterval(() => {
       this.time = new Date().toLocaleString("en-US", { timeZone: "Asia/Kolkata" })
@@ -29,13 +28,14 @@ export class DashboardComponent implements OnInit {
   }
 
   async getUserData() {
-    this.httpClient.post(environment.endpoint + '/get-user-data', { username: localStorage.getItem('username'), password: this.userData.password }).subscribe((res: any) => {
-      if (!res.error) {
+    this.httpClient.post(environment.endpoint + '/get-user-data', { username: this.userdata.username, password: this.userdata.password }).subscribe({
+      next: (res: any) => {
         localStorage.setItem('userdata', JSON.stringify(res.data))
-        this.userData = res.data
+        this.userdata = res.data
         this.transfers = res.transfers
-      } else {
-        alert(res.message)
+      },
+      error: (err: any) => {
+        alert(err.error)
       }
     })
   }

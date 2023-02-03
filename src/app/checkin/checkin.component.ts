@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { BarcodeFormat } from '@zxing/library';
 import { environment } from 'src/environments/environment';
 
@@ -8,30 +8,32 @@ import { environment } from 'src/environments/environment';
   templateUrl: './checkin.component.html',
   styleUrls: ['./checkin.component.scss']
 })
-export class CheckinComponent implements OnInit {
+export class CheckinComponent {
 
   allowedFormats = [BarcodeFormat.QR_CODE]
   spinner = false
   checkin = true
 
-  userdata: any
+  userdata = JSON.parse(localStorage.getItem('userdata')!)
 
   constructor(private httpClient: HttpClient) { }
 
-  ngOnInit() {
-    this.userdata = JSON.parse(localStorage.getItem('userdata')!)
-  }
-
   scanSuccessHandler(qr: string) {
     this.spinner = true
-    this.httpClient.post(environment.endpoint + '/checkin', { qr: qr, username: localStorage.getItem('username'), password: this.userdata.password, checkin: this.checkin }).subscribe({
+    const data = {
+      qr: qr,
+      username: this.userdata.username,
+      password: this.userdata.password,
+      checkin: this.checkin
+    }
+    this.httpClient.post(environment.endpoint + '/checkin', data).subscribe({
       next: (res: any) => {
-        alert(res.message)
         this.spinner = false
+        alert(res.message)
       },
       error: (err) => {
-        alert('Error has occured')
         this.spinner = false
+        alert(err.error)
       }
     })
   }
