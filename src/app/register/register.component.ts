@@ -70,25 +70,21 @@ export class RegisterComponent implements OnInit {
     if (!this.formData.valid) return
     this.spinner = true
     const data = {
-      username: localStorage.getItem('username'),
+      username: this.userdata.username,
       password: this.userdata.password,
-      s_username: this.formData.controls.username.value as string,
-      s_password: this.formData.controls.password.value as string,
+      s_username: this.formData.controls.username.value?.toLowerCase(),
+      s_password: this.formData.controls.password.value?.toString(),
       quantity: this.quantity,
     }
     this.httpClient.post(environment.endpoint + '/recharge', data).subscribe({
       next: (res: any) => {
-        if (!res.error) {
-          alert('Recharge successful')
-          this.router.navigate(['dashboard'])
-        } else {
-          alert(res.message)
-        }
         this.spinner = false
+        alert('Recharge successful')
+        this.router.navigate(['dashboard'])
       },
-      error: (e) => {
-        alert('Error has occured')
+      error: (err) => {
         this.spinner = false
+        alert(err.error)
       }
     })
   }
