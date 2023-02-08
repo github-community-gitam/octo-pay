@@ -48,10 +48,8 @@ export class RegisterComponent implements OnInit {
     if (!this.formData.valid) return
     this.spinner = true
     const data = {
-      username: this.userdata.username,
-      password: this.userdata.password,
-      s_username: this.formData.controls.username.value?.toLowerCase(),
-      s_password: this.formData.controls.password.value?.toString(),
+      username: this.formData.controls.username.value?.toLowerCase(),
+      password: this.formData.controls.password.value?.toString(),
     }
     this.httpClient.post(environment.endpoint + '/register', data).subscribe({
       next: (res: any) => {
