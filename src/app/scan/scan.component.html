@@ -1,10 +1,33 @@
 <div class="d-flex flex-column p-4 h-100">
-    <label class="mx-auto fs-1" >Scan QR</label>
+    <label class="mx-auto fs-1">Scan QR</label>
     <div class="d-flex mx-auto py-4" style="height: 250px; width: 250px;">
         <zxing-scanner *ngIf="!spinner" class="mx-auto" [formats]="allowedFormats"
-            (scanSuccess)="scanSuccessHandler($event)"></zxing-scanner>
+            (scanSuccess)="scanSuccessHandler($event)" (scanError)="refresh()"></zxing-scanner>
         <div class="m-auto">
             <div *ngIf="spinner" class="spinner-border spinner-border-sm"></div>
+        </div>
+    </div>
+</div>
+
+<div id="modal-button" data-bs-toggle="modal" data-bs-target="#devBackdrop"></div>
+
+<div class="modal fade" id="devBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content bg-bg">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5">Number of people</h1>
+                <button type="button" class="btn-close bg-white" (click)="toggleModal()"></button>
+            </div>
+            <div class="modal-body d-flex">
+                <button class="btn btn-light" [disabled]="quantity<=1" (click)="quantity = quantity - 1">-</button>
+                <label class="mx-3 my-auto">{{ quantity }}</label>
+                <button class="btn btn-light" [disabled]="quantity >=4" (click)="quantity = quantity + 1">+</button>
+                <label class="text-end my-auto ms-auto">Rs {{ quantity * stalldata?.amt}}</label>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light" (click)="transferoc()"
+                    data-bs-dismiss="modal">Confirm</button>
+            </div>
         </div>
     </div>
 </div>

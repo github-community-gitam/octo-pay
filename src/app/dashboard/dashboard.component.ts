@@ -54,5 +54,3 @@ export class DashboardComponent implements OnInit {
     localStorage.removeItem('userdata')
   }
 }
-
-
