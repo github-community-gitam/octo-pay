@@ -13,11 +13,13 @@
     <div class="row">
         <div class="d-flex flex-column" *ngFor="let item of data | keyvalue">
             <div class="d-flex flex-column searchbar bg-accent my-2 p-4 text-black"
-                *ngIf="(item.value['username'] | lowercase).includes(searchKey | lowercase) || (item.value['fullname'] | lowercase).includes(searchKey | lowercase)">
-                <label>Username: {{ item.value['username'] }}</label>
+                *ngIf="(item.value['reg'] | lowercase).includes(searchKey | lowercase) || (item.value['fullname'] | lowercase).includes(searchKey | lowercase)">
+                <label>Reg: {{ item.value['reg'] }}</label>
                 <label>Fullname: {{ item.value['fullname'] }}</label>
                 <label>Balance: {{ item.value['balance'] }}</label>
                 <label>Dev: {{ item.value['dev'] }}</label>
+                <label>Stall: {{ item.value['stall'] }}</label>
+                <label>Recharged: {{ item.value['recharged'] }}</label>
             </div>
         </div>
     </div>
